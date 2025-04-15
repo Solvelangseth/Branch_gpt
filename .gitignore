@@ -1,0 +1,28 @@
+# 1. Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 2. Virtual Environment
+venv/
+
+# 3. Environment Variables
+.env
+
+# 4. Database Files
+chat.db
+*.db
+
+# 5. Operating System & Editor Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# 6. Coverage, Testing, & Logs (Optional)
+coverage/
+htmlcov/
+*.log
+
+# 7. Node modules (if applicable for any front-end part)
+node_modules/
