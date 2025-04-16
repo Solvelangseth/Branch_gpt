@@ -33,99 +33,89 @@ class ChatWindow(QMainWindow):
         self.setWindowTitle("Branching Chat")
         self.setStyleSheet("""
             QMainWindow, QWidget {
-                background-color: #f0f0f0;
-                font-family: 'Arial', sans-serif;
+                background-color: #ffffff;
+                font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
             }
             QPushButton {
-                background-color: #9ea1ff;
-                border: 3px solid #000000;
-                border-radius: 4px;
+                background-color: #ffffff;
+                border: 1px solid #e1e1e1;
+                border-radius: 8px;
                 padding: 10px 16px;
-                font-weight: bold;
+                font-weight: 500;
                 margin: 6px;
                 color: #000000;
                 font-size: 14px;
                 position: relative;
-                box-shadow: 5px 5px 0px #000000;
             }
             QPushButton:hover {
-                background-color: #8a8eff;
-                transform: translate(-2px, -2px);
-                box-shadow: 7px 7px 0px #000000;
+                background-color: #f8f8f8;
+                border-color: #d1d1d1;
             }
             QPushButton:pressed {
-                background-color: #7c80ff;
-                transform: translate(0px, 0px);
-                box-shadow: 3px 3px 0px #000000;
+                background-color: #f0f0f0;
             }
             QListWidget {
                 background-color: #ffffff;
-                border: 3px solid #000000;
-                border-radius: 4px;
+                border: 1px solid #e1e1e1;
+                border-radius: 8px;
                 padding: 10px;
                 font-size: 14px;
-                box-shadow: 5px 5px 0px #000000;
             }
             QListWidget::item {
-                padding: 10px;
+                padding: 12px;
                 margin: 4px 0px;
-                border: 2px solid #000000;
-                border-radius: 2px;
-                background-color: #ffde59;
+                border: none;
+                border-radius: 6px;
+                background-color: #f8f8f8;
                 color: #000000;
-                box-shadow: 3px 3px 0px #000000;
             }
             QListWidget::item:selected {
-                background-color: #ffd32a;
+                background-color: #f0f0f0;
                 color: #000000;
-                font-weight: bold;
-                border: 3px solid #000000;
+                font-weight: 500;
             }
             QTabWidget::pane {
-                border: 3px solid #000000;
-                border-radius: 4px;
+                border: 1px solid #e1e1e1;
+                border-radius: 8px;
                 background-color: #ffffff;
-                box-shadow: 5px 5px 0px #000000;
             }
             QTabBar::tab {
                 background-color: #ffffff;
-                border: 3px solid #000000;
+                border: 1px solid #e1e1e1;
                 border-bottom-color: transparent;
-                border-top-left-radius: 4px;
-                border-top-right-radius: 4px;
-                padding: 8px 12px;
+                border-top-left-radius: 6px;
+                border-top-right-radius: 6px;
+                padding: 8px 16px;
                 margin-right: 2px;
-                font-weight: bold;
+                font-weight: 500;
                 color: #000000;
             }
             QTabBar::tab:selected {
-                background-color: #ffde59;
+                background-color: #f8f8f8;
             }
             QLineEdit {
-                border: 3px solid #000000;
-                border-radius: 4px;
+                border: 1px solid #e1e1e1;
+                border-radius: 8px;
                 padding: 10px;
                 background-color: #ffffff;
                 font-size: 14px;
                 color: #000000;
-                box-shadow: 5px 5px 0px #000000;
             }
             QTextEdit {
-                border: 3px solid #000000;
-                border-radius: 4px;
+                border: 1px solid #e1e1e1;
+                border-radius: 8px;
                 padding: 15px;
                 background-color: #ffffff;
                 font-size: 14px;
                 color: #000000;
-                box-shadow: 5px 5px 0px #000000;
             }
             QLabel {
                 color: #000000;
-                font-weight: bold;
+                font-weight: 500;
             }
             QSplitter::handle {
-                background-color: #000000;
-                width: 2px;
+                background-color: #e1e1e1;
+                width: 1px;
             }
         """)
         
@@ -146,15 +136,14 @@ class ChatWindow(QMainWindow):
         
         # Header for sidebar
         sidebar_header = QLabel("Conversations")
-        sidebar_header.setFont(QFont("Arial", 18, QFont.Bold))
+        sidebar_header.setFont(QFont("-apple-system", 18, QFont.Medium))
         sidebar_header.setAlignment(Qt.AlignCenter)
         sidebar_header.setStyleSheet("""
-            padding: 10px;
-            background-color: #9ea1ff;
-            border: 3px solid #000000;
-            border-radius: 4px;
+            padding: 15px;
+            background-color: transparent;
+            color: #000000;
             margin-bottom: 10px;
-            box-shadow: 5px 5px 0px #000000;
+            border-bottom: 1px solid #e1e1e1;
         """)
         sidebar_layout.addWidget(sidebar_header)
         
@@ -162,24 +151,20 @@ class ChatWindow(QMainWindow):
         new_chat_btn = QPushButton("+ New Chat")
         new_chat_btn.setStyleSheet("""
             QPushButton {
-                background-color: #ffde59;
-                border: 3px solid #000000;
-                border-radius: 4px;
+                background-color: #007AFF;
+                border: none;
+                border-radius: 8px;
                 padding: 12px;
-                font-weight: bold;
+                font-weight: 500;
                 margin: 10px 5px;
-                color: #000000;
+                color: #ffffff;
                 font-size: 15px;
-                box-shadow: 5px 5px 0px #000000;
             }
             QPushButton:hover {
-                background-color: #ffd32a;
-                transform: translate(-2px, -2px);
-                box-shadow: 7px 7px 0px #000000;
+                background-color: #0066DD;
             }
             QPushButton:pressed {
-                transform: translate(0px, 0px);
-                box-shadow: 3px 3px 0px #000000;
+                background-color: #0055CC;
             }
         """)
         new_chat_btn.clicked.connect(self.create_new_chat)
@@ -189,14 +174,12 @@ class ChatWindow(QMainWindow):
         self.empty_label = QLabel("No conversations yet.\nClick '+New Chat' to start.")
         self.empty_label.setAlignment(Qt.AlignCenter)
         self.empty_label.setStyleSheet("""
-            color: #000000;
+            color: #666666;
             margin: 20px 0;
             font-size: 14px;
             padding: 20px;
-            background-color: #ffffff;
-            border: 3px solid #000000;
-            border-radius: 4px;
-            box-shadow: 5px 5px 0px #000000;
+            background-color: transparent;
+            line-height: 1.6;
         """)
         sidebar_layout.addWidget(self.empty_label)
         
@@ -226,58 +209,49 @@ class ChatWindow(QMainWindow):
         # Welcome widget
         welcome_widget = QWidget()
         welcome_layout = QVBoxLayout(welcome_widget)
-        welcome_layout.setContentsMargins(20, 30, 20, 30)
-        welcome_layout.setSpacing(20)
+        welcome_layout.setContentsMargins(40, 60, 40, 60)
+        welcome_layout.setSpacing(30)
         
         welcome_label = QLabel("Welcome to Branching Chat")
-        welcome_label.setFont(QFont("Arial", 24, QFont.Bold))
+        welcome_label.setFont(QFont("-apple-system", 32, QFont.Medium))
         welcome_label.setAlignment(Qt.AlignCenter)
         welcome_label.setStyleSheet("""
             color: #000000;
             margin: 20px 0;
             padding: 20px;
-            background-color: #9ea1ff;
-            border: 3px solid #000000;
-            border-radius: 4px;
-            box-shadow: 5px 5px 0px #000000;
+            background-color: transparent;
         """)
         
-        instructions_label = QLabel("Click '+ New Chat' to start a new conversation.\n\nYou can create branches from any conversation to explore alternative discussion paths.")
+        instructions_label = QLabel("Start a new conversation and explore different paths through branching.\nCreate alternate discussion branches at any point to explore different directions.")
         instructions_label.setAlignment(Qt.AlignCenter)
         instructions_label.setStyleSheet("""
-            color: #000000;
+            color: #666666;
             font-size: 16px;
             margin: 15px 0;
             padding: 20px;
-            background-color: #ffffff;
-            border: 3px solid #000000;
-            border-radius: 4px;
-            box-shadow: 5px 5px 0px #000000;
+            background-color: transparent;
+            line-height: 1.6;
         """)
         
         start_button = QPushButton("Start New Chat")
-        start_button.setMinimumHeight(60)
-        start_button.setMinimumWidth(220)
+        start_button.setMinimumHeight(50)
+        start_button.setMinimumWidth(200)
         start_button.setStyleSheet("""
             QPushButton {
-                background-color: #ffde59;
-                border: 3px solid #000000;
-                border-radius: 4px;
+                background-color: #007AFF;
+                border: none;
+                border-radius: 25px;
                 padding: 15px 30px;
-                font-weight: bold;
-                font-size: 18px;
-                color: #000000;
+                font-weight: 500;
+                font-size: 16px;
+                color: #ffffff;
                 margin: 20px auto;
-                box-shadow: 5px 5px 0px #000000;
             }
             QPushButton:hover {
-                background-color: #ffd32a;
-                transform: translate(-2px, -2px);
-                box-shadow: 7px 7px 0px #000000;
+                background-color: #0066DD;
             }
             QPushButton:pressed {
-                transform: translate(0px, 0px);
-                box-shadow: 3px 3px 0px #000000;
+                background-color: #0055CC;
             }
         """)
         start_button.clicked.connect(self.create_new_chat)

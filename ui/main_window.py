@@ -17,18 +17,16 @@ class BranchButton(QPushButton):
         super().__init__(f"🔄 {branch_title}")
         self.branch_id = branch_id
         self.setStyleSheet("""
-            background-color: #ffde59;
-            border: 3px solid #000000;
-            border-radius: 4px;
+            background-color: #ffffff;
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
             padding: 10px;
-            font-weight: bold;
+            font-weight: 500;
             font-size: 13px;
             margin: 5px 8px;
             text-align: left;
             color: #000000;
-            box-shadow: 3px 3px 0px #000000;
         """)
-        # Set maximum width but allow wrapping text
         self.setMaximumWidth(300)
         self.setMinimumHeight(45)
 
@@ -117,7 +115,7 @@ class ChatTab(QWidget):
     def init_ui(self):
         layout = QVBoxLayout(self)
         layout.setSpacing(15)
-        layout.setContentsMargins(15, 15, 15, 15)
+        layout.setContentsMargins(20, 20, 20, 20)
         
         # Chat log - messages between user and assistant
         self.chat_log = QTextEdit()
@@ -125,13 +123,12 @@ class ChatTab(QWidget):
         self.chat_log.setStyleSheet("""
             QTextEdit {
                 background-color: #ffffff;
-                border: 3px solid #000000;
-                border-radius: 4px;
+                border: 1px solid #e1e1e1;
+                border-radius: 8px;
                 padding: 15px;
                 font-size: 15px;
                 line-height: 1.6;
                 color: #000000;
-                box-shadow: 5px 5px 0px #000000;
             }
         """)
         
@@ -149,20 +146,19 @@ class ChatTab(QWidget):
         
         self.input_field = QLineEdit()
         self.input_field.setPlaceholderText("Type your message...")
-        self.input_field.setMinimumHeight(55)
+        self.input_field.setMinimumHeight(50)
         self.input_field.setStyleSheet("""
             QLineEdit {
-                border: 3px solid #000000;
-                border-radius: 4px;
-                padding: 12px 15px;
+                border: 1px solid #e1e1e1;
+                border-radius: 25px;
+                padding: 12px 20px;
                 background-color: #ffffff;
                 font-size: 15px;
                 color: #000000;
-                box-shadow: 5px 5px 0px #000000;
             }
             QLineEdit:focus {
-                border-color: #000000;
-                background-color: #fffaf0;
+                border-color: #007AFF;
+                background-color: #ffffff;
             }
         """)
         self.input_field.returnPressed.connect(self.send_message)
@@ -172,53 +168,46 @@ class ChatTab(QWidget):
         button_layout.setSpacing(12)
         
         self.send_button = QPushButton("Send")
-        self.send_button.setMinimumHeight(55)
+        self.send_button.setMinimumHeight(50)
         self.send_button.setMinimumWidth(100)
         self.send_button.setStyleSheet("""
             QPushButton {
-                background-color: #9ea1ff;
-                border: 3px solid #000000;
-                border-radius: 4px;
+                background-color: #007AFF;
+                border: none;
+                border-radius: 25px;
                 padding: 10px 20px;
-                font-weight: bold;
-                color: #000000;
+                font-weight: 500;
+                color: #ffffff;
                 font-size: 15px;
-                box-shadow: 5px 5px 0px #000000;
             }
             QPushButton:hover {
-                background-color: #8a8eff;
-                transform: translate(-2px, -2px);
-                box-shadow: 7px 7px 0px #000000;
+                background-color: #0066DD;
             }
             QPushButton:pressed {
-                transform: translate(0px, 0px);
-                box-shadow: 3px 3px 0px #000000;
+                background-color: #0055CC;
             }
         """)
         self.send_button.clicked.connect(self.send_message)
         
         self.branch_button = QPushButton("Branch Chat")
-        self.branch_button.setMinimumHeight(55)
+        self.branch_button.setMinimumHeight(50)
         self.branch_button.setMinimumWidth(120)
         self.branch_button.setStyleSheet("""
             QPushButton {
-                background-color: #ffde59;
-                border: 3px solid #000000;
-                border-radius: 4px;
+                background-color: #ffffff;
+                border: 1px solid #e1e1e1;
+                border-radius: 25px;
                 padding: 10px 20px;
-                font-weight: bold;
+                font-weight: 500;
                 color: #000000;
                 font-size: 15px;
-                box-shadow: 5px 5px 0px #000000;
             }
             QPushButton:hover {
-                background-color: #ffd32a;
-                transform: translate(-2px, -2px);
-                box-shadow: 7px 7px 0px #000000;
+                background-color: #f8f8f8;
+                border-color: #d1d1d1;
             }
             QPushButton:pressed {
-                transform: translate(0px, 0px);
-                box-shadow: 3px 3px 0px #000000;
+                background-color: #f0f0f0;
             }
         """)
         self.branch_button.clicked.connect(self.create_branch)
@@ -257,24 +246,22 @@ class ChatTab(QWidget):
         for message in messages:
             message_id = self.get_next_message_id()
             if message['role'] == 'user':
-                # Process user messages
                 formatted_content = self.format_markdown(message['content'])
-                self.chat_log.append(f"""<div id="msg-{message_id}" style="margin: 10px 0; padding: 12px; background-color: #f0f0f0; border: 2px solid #000000; border-radius: 4px;">
+                self.chat_log.append(f"""<div id="msg-{message_id}" style="margin: 10px 0; padding: 16px; background-color: #f8f8f8; border-radius: 12px;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <b style="color:#000000; font-size: 15px;">User:</b>
-                        <span class="message-options" data-id="{message_id}" data-role="user" style="cursor: pointer; font-weight: bold; color: #000;">⋮</span>
+                        <b style="color:#000000; font-size: 15px; font-weight: 500;">You</b>
+                        <span class="message-options" data-id="{message_id}" data-role="user" style="cursor: pointer; font-weight: 500; color: #666666;">⋮</span>
                     </div>
-                    <div style="margin-top: 8px;">{formatted_content}</div>
+                    <div style="margin-top: 8px; line-height: 1.6;">{formatted_content}</div>
                 </div>""")
             else:
-                # Process assistant messages with markdown support
                 formatted_content = self.format_markdown(message['content'])
-                self.chat_log.append(f"""<div id="msg-{message_id}" style="margin: 10px 0; padding: 12px; background-color: #e0f0ff; border: 2px solid #000000; border-radius: 4px;">
+                self.chat_log.append(f"""<div id="msg-{message_id}" style="margin: 10px 0; padding: 16px; background-color: #ffffff; border: 1px solid #e1e1e1; border-radius: 12px;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <b style="color:#000000; font-size: 15px;">Assistant:</b>
-                        <span class="message-options" data-id="{message_id}" data-role="assistant" style="cursor: pointer; font-weight: bold; color: #000;">⋮</span>
+                        <b style="color:#000000; font-size: 15px; font-weight: 500;">Assistant</b>
+                        <span class="message-options" data-id="{message_id}" data-role="assistant" style="cursor: pointer; font-weight: 500; color: #666666;">⋮</span>
                     </div>
-                    <div style="margin-top: 8px;">{formatted_content}</div>
+                    <div style="margin-top: 8px; line-height: 1.6;">{formatted_content}</div>
                 </div>""")
         
         # Connect options menu after loading all messages
@@ -375,29 +362,28 @@ class ChatTab(QWidget):
         branch_tab = self.parent_window.add_branch_tab(parent_id, new_convo_id, branch_title)
         
         # Notify in the current tab that a branch was created
-        self.chat_log.append(f"""<div style="margin: 15px 0; padding: 12px; background-color: #ffde59; border: 3px solid #000000; border-radius: 4px; box-shadow: 5px 5px 0px #000000;">
-            <span style="color:#000000; font-weight: bold; font-size: 15px;">Branch created from message #{message_id}</span>
+        self.chat_log.append(f"""<div style="margin: 15px 0; padding: 16px; background-color: #f8f8f8; border-radius: 12px;">
+            <span style="color:#000000; font-weight: 500; font-size: 15px;">Branch created from message #{message_id}</span>
         </div>""")
         
         # Add a note to the new branch about its origin
         if branch_tab:
-            branch_tab.chat_log.append(f"""<div style="margin: 15px 0; padding: 12px; background-color: #ffde59; border: 3px solid #000000; border-radius: 4px; box-shadow: 5px 5px 0px #000000;">
-                <b style="color:#000000; font-size: 15px;">Branch Info:</b>
-                <div style="margin-top: 8px;">This branch was created from message #{message_id} in the parent conversation.</div>
+            branch_tab.chat_log.append(f"""<div style="margin: 15px 0; padding: 16px; background-color: #f8f8f8; border-radius: 12px;">
+                <b style="color:#000000; font-size: 15px; font-weight: 500;">Branch Info</b>
+                <div style="margin-top: 8px; line-height: 1.6;">This branch was created from message #{message_id} in the parent conversation.</div>
             </div>""")
 
     def send_message(self):
         message = self.input_field.text().strip()
         if message:
-            # Format user message with markdown
             formatted_message = self.format_markdown(message)
             message_id = self.get_next_message_id()
-            self.chat_log.append(f"""<div id="msg-{message_id}" style="margin: 10px 0; padding: 12px; background-color: #f0f0f0; border: 2px solid #000000; border-radius: 4px;">
+            self.chat_log.append(f"""<div id="msg-{message_id}" style="margin: 10px 0; padding: 16px; background-color: #f8f8f8; border-radius: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <b style="color:#000000; font-size: 15px;">User:</b>
-                    <span class="message-options" data-id="{message_id}" data-role="user" style="cursor: pointer; font-weight: bold; color: #000;">⋮</span>
+                    <b style="color:#000000; font-size: 15px; font-weight: 500;">You</b>
+                    <span class="message-options" data-id="{message_id}" data-role="user" style="cursor: pointer; font-weight: 500; color: #666666;">⋮</span>
                 </div>
-                <div style="margin-top: 8px;">{formatted_message}</div>
+                <div style="margin-top: 8px; line-height: 1.6;">{formatted_message}</div>
             </div>""")
             self.input_field.clear()
             
@@ -420,8 +406,8 @@ class ChatTab(QWidget):
             
             # Show typing indicator
             typing_index = self.chat_log.document().characterCount()
-            self.chat_log.append("""<div style="margin: 10px 0; padding: 12px; background-color: #e0f0ff; border: 2px dashed #000000; border-radius: 4px;">
-                <i style="color:#000000;">Assistant is typing...</i>
+            self.chat_log.append("""<div style="margin: 10px 0; padding: 16px; background-color: #ffffff; border: 1px solid #e1e1e1; border-radius: 12px;">
+                <i style="color:#666666;">Assistant is typing...</i>
             </div>""")
             
             # Start the API call in a separate thread to avoid UI freezing
@@ -466,8 +452,8 @@ class ChatTab(QWidget):
         self.parent_window.add_branch_tab(parent_id, new_convo_id, branch_title)
         
         # Notify in the current tab that a branch was created
-        self.chat_log.append(f"""<div style="margin: 15px 0; padding: 12px; background-color: #ffde59; border: 3px solid #000000; border-radius: 4px; box-shadow: 5px 5px 0px #000000;">
-            <span style="color:#000000; font-weight: bold; font-size: 15px;">Branch created: {branch_title}</span>
+        self.chat_log.append(f"""<div style="margin: 15px 0; padding: 16px; background-color: #f8f8f8; border-radius: 12px;">
+            <span style="color:#000000; font-weight: 500; font-size: 15px;">Branch created: {branch_title}</span>
         </div>""")
 
     def call_api(self, conversation_history, typing_index=None, user_message=None):
@@ -484,12 +470,12 @@ class ChatTab(QWidget):
             # Format assistant response with markdown
             formatted_response = self.format_markdown(response)
             message_id = self.get_next_message_id()
-            self.chat_log.append(f"""<div id="msg-{message_id}" style="margin: 10px 0; padding: 12px; background-color: #e0f0ff; border: 2px solid #000000; border-radius: 4px;">
+            self.chat_log.append(f"""<div id="msg-{message_id}" style="margin: 10px 0; padding: 16px; background-color: #ffffff; border: 1px solid #e1e1e1; border-radius: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <b style="color:#000000; font-size: 15px;">Assistant:</b>
-                    <span class="message-options" data-id="{message_id}" data-role="assistant" style="cursor: pointer; font-weight: bold; color: #000;">⋮</span>
+                    <b style="color:#000000; font-size: 15px; font-weight: 500;">Assistant</b>
+                    <span class="message-options" data-id="{message_id}" data-role="assistant" style="cursor: pointer; font-weight: 500; color: #666666;">⋮</span>
                 </div>
-                <div style="margin-top: 8px;">{formatted_response}</div>
+                <div style="margin-top: 8px; line-height: 1.6;">{formatted_response}</div>
             </div>""")
             
             # Connect options menu to the newly added message
@@ -517,9 +503,9 @@ class ChatTab(QWidget):
                 cursor.movePosition(cursor.End, cursor.KeepAnchor)
                 cursor.removeSelectedText()
             
-            self.chat_log.append(f"""<div style="margin: 10px 0; padding: 12px; background-color: #ffcccc; border: 2px solid #000000; border-radius: 4px;">
-                <b style="color:#000000; font-size: 15px;">Error:</b>
-                <div style="margin-top: 8px;">{error_message}</div>
+            self.chat_log.append(f"""<div style="margin: 10px 0; padding: 16px; background-color: #fff5f5; border-radius: 12px;">
+                <b style="color:#dc2626; font-size: 15px; font-weight: 500;">Error</b>
+                <div style="margin-top: 8px; color: #dc2626; line-height: 1.6;">{error_message}</div>
             </div>""")
     
     def generate_and_update_title(self, user_message, assistant_response):
@@ -587,18 +573,17 @@ class ChatTab(QWidget):
             self.branch_popup_button.setText("Branch")
             self.branch_popup_button.setStyleSheet("""
                 QToolButton {
-                    background-color: #ffde59;
-                    border: 2px solid #000000;
-                    border-radius: 4px;
-                    padding: 5px 8px;
-                    font-weight: bold;
+                    background-color: #ffffff;
+                    border: 1px solid #e1e1e1;
+                    border-radius: 15px;
+                    padding: 5px 12px;
+                    font-weight: 500;
                     font-size: 12px;
                     color: #000000;
-                    box-shadow: 3px 3px 0px #000000;
                 }
                 QToolButton:hover {
-                    background-color: #ffd32a;
-                    transform: translate(-2px, -2px);
+                    background-color: #f8f8f8;
+                    border-color: #d1d1d1;
                 }
             """)
             self.branch_popup_button.clicked.connect(self.create_branch_from_selection)
@@ -649,8 +634,8 @@ class ChatTab(QWidget):
         branch_tab = self.parent_window.add_branch_tab(parent_id, new_convo_id, branch_title)
         
         # Notify in the current tab that a branch was created
-        self.chat_log.append(f"""<div style="margin: 15px 0; padding: 12px; background-color: #ffde59; border: 3px solid #000000; border-radius: 4px; box-shadow: 5px 5px 0px #000000;">
-            <span style="color:#000000; font-weight: bold; font-size: 15px;">Branch created with selected text</span>
+        self.chat_log.append(f"""<div style="margin: 15px 0; padding: 16px; background-color: #f8f8f8; border-radius: 12px;">
+            <span style="color:#000000; font-weight: 500; font-size: 15px;">Branch created with selected text</span>
         </div>""")
         
         # Add the highlighted text as context to the new branch
@@ -665,15 +650,15 @@ class ChatTab(QWidget):
             
             if is_code:
                 # Format as code block with special styling
-                branch_tab.chat_log.append(f"""<div style="margin: 15px 0; padding: 12px; background-color: #1e1e1e; border: 3px solid #000000; border-radius: 4px; box-shadow: 5px 5px 0px #000000;">
-                    <b style="color:#ffffff; font-size: 15px;">Selected Code Context:</b>
-                    <pre style="margin-top: 12px; padding: 15px; background-color: #2d2d2d; border: 2px solid #555; border-radius: 4px; color: #e0e0e0; font-family: monospace; font-size: 14px; overflow-x: auto;">{formatted_highlight}</pre>
+                branch_tab.chat_log.append(f"""<div style="margin: 15px 0; padding: 16px; background-color: #1e1e1e; border-radius: 12px;">
+                    <b style="color:#ffffff; font-size: 15px; font-weight: 500;">Selected Code Context</b>
+                    <pre style="margin-top: 12px; padding: 15px; background-color: #2d2d2d; border-radius: 8px; color: #e0e0e0; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 14px; line-height: 1.6; overflow-x: auto;">{formatted_highlight}</pre>
                 </div>""")
             else:
                 # Format as regular text with special styling
-                branch_tab.chat_log.append(f"""<div style="margin: 15px 0; padding: 12px; background-color: #e0f0ff; border: 3px solid #000000; border-radius: 4px; box-shadow: 5px 5px 0px #000000;">
-                    <b style="color:#000000; font-size: 15px;">Selected Text Context:</b>
-                    <div style="margin-top: 8px; padding: 10px; background-color: #fffbea; border: 2px solid #ffd32a; border-radius: 4px; font-style: italic; font-weight: bold;">{formatted_highlight}</div>
+                branch_tab.chat_log.append(f"""<div style="margin: 15px 0; padding: 16px; background-color: #f8f8f8; border-radius: 12px;">
+                    <b style="color:#000000; font-size: 15px; font-weight: 500;">Selected Text Context</b>
+                    <div style="margin-top: 8px; padding: 12px; background-color: #ffffff; border: 1px solid #e1e1e1; border-radius: 8px; font-style: italic; line-height: 1.6;">{formatted_highlight}</div>
                 </div>""")
         
         # Hide the popup button after creating the branch
